@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscriber } from 'rxjs';
+import { PointsService } from 'src/app/services/points.service';
+import Point from 'src/models/point.model';
 
 @Component({
   selector: 'app-points',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PointsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public pointsService: PointsService) { 
+
+    
+  }
 
   ngOnInit(): void {
+    this.pointsService.getAll().subscribe((points) => {
+this.points = points;
+    })
   }
+
+public points: Point[] = [];
+
 
 }
