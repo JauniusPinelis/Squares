@@ -10,18 +10,15 @@ import Point from 'src/models/point.model';
 })
 export class PointsComponent implements OnInit {
 
-  constructor(public pointsService: PointsService) { 
+  public points: Point[] = [
 
-    
-  }
+  ];
+
+  constructor(public pointsService: PointsService) {}
 
   ngOnInit(): void {
     this.pointsService.getAll().subscribe((points) => {
-this.points = points;
+      this.points = points;
     })
   }
-
-public points: Point[] = [];
-
-
 }
