@@ -1,0 +1,22 @@
+﻿@model TodoListApplication.Dtos.CreateTodo
+
+@using (Html.BeginForm("Add", "Todo", FormMethod.Post))
+{
+    @Html.LabelFor(a => a.Todo.Name)
+    @Html.TextBoxFor(a => a.Todo.Name)
+    @Html.ValidationMessageFor(a => a.Todo.Name)
+
+    @Html.LabelFor(a => a.Todo.Description)
+    @Html.TextBoxFor(a => a.Todo.Description)
+    @Html.ValidationMessageFor(a => a.Todo.Description)
+
+    @Html.LabelFor(a => a.Todo.Category)
+    @Html.DropDownListFor(a => a.Todo.CategoryId, new SelectList(@Model.AllCategories,"Id", "Name"))
+    @Html.ValidationMessageFor(a => a.Todo.Category)
+
+    @Html.LabelFor(a => a.Todo.TodoTags)
+    @Html.ListBoxFor(a => a.SelectedTagIds, new SelectList(@Model.Tags,"Id", "Name"))
+    @Html.ValidationMessageFor(a => a.Todo.Category)
+        
+    <input type="submit" value="Submit"/>
+}
