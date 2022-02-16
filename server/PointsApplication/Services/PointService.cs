@@ -38,15 +38,10 @@ namespace TodoApplication.Services
 
         public async Task<int> CreateAsync(CreatePoint createTodo)
         {
-            var doesNameExist = _dataContext.Points.Select(x => x.Name).Contains(createTodo.Name);
-            if (doesNameExist)
-            {
-                throw new ArgumentException("The name already exists");
-            }
-
             var model = new PointModel()
             {
-                Name = createTodo.Name
+                X = createTodo.X,
+                Y = createTodo.Y
             };
 
             _dataContext.Points.Add(model);
@@ -60,13 +55,8 @@ namespace TodoApplication.Services
 
             var todo = await GetByIdAsync(id);
 
-            var doesNameExist = await _dataContext.Points.AnyAsync(x => x.Name == updateTodo.Name);
-            if (doesNameExist)
-            {
-                throw new ArgumentException("The name already exists");
-            }
-
-            todo.Name = updateTodo.Name;
+            todo.X = updateTodo.X;
+            todo.Y = updateTodo.Y;
 
             await _dataContext.SaveChangesAsync();
         }
