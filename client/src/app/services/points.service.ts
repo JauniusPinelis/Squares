@@ -11,6 +11,6 @@ export class PointsService {
   constructor(private httpClient: HttpClient) { }
 
   public getAll() : Observable<Point[]> {
-    return this.httpClient.get<Point[]>('https://localhost:4338/point');
+    return this.httpClient.get<Point[]>('https://localhost:44338/point');
   }
 }
