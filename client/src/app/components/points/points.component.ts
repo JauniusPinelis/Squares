@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscriber } from 'rxjs';
 import { PointsService } from 'src/app/services/points.service';
 import Point from 'src/models/point.model';
 
@@ -9,16 +8,22 @@ import Point from 'src/models/point.model';
   styleUrls: ['./points.component.css']
 })
 export class PointsComponent implements OnInit {
-
   public points: Point[] = [
-
-  ];
-
-  constructor(public pointsService: PointsService) {}
+    ];
+  constructor(private pointsService: PointsService) { }
 
   ngOnInit(): void {
-    this.pointsService.getAll().subscribe((points) => {
-      this.points = points;
+    this.pointsService.getAll().subscribe((pointsData) => {
+      this.points = pointsData;
     })
   }
+public delete(id: number): void {
+  this.pointsService.delete(id).subscribe(()=>{
+    this.points = this.points.filter(p => p.id !=id);
+  });
+
+  
+
+} 
+
 }
